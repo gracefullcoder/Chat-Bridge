@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react'
-import { io } from 'Socket.io-client'
+import React, { useEffect, useState, useMemo, useRef } from 'react';
+import { io } from 'socket.io-client'
 
 function App() {
   const socket = useMemo(() => io("http://localhost:3000"), []);

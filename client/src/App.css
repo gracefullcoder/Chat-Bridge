@@ -1,124 +1,133 @@
-/* App.css */
-
+/* General container styling */
 .container {
   display: flex;
   height: 100vh;
-  font-family: 'Poppins', sans-serif;
-  background-color: #3B3255; /* Overall background color */
+  font-family: 'Helvetica', sans-serif;
+  background-color: #e5ddd5;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Sidebar styling for user input */
 .sidebar {
-  flex: 1;
-  padding: 1.5rem;
-  background-color: #5C4F82; /* Sidebar purple */
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  position: fixed;
-
+  width: 20%;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+  color: black; /* Set sidebar text color to black */
 }
 
 .sidebar h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem; /* Reduced gap between title and input boxes */
-  color: #ffffff;
+  font-size: 1.5em;
+  margin-bottom: 20px;
 }
 
-.sidebar p {
-  margin: 0.5rem 0;
-}
-
-.sidebar input[type="text"] {
+.sidebar input {
   width: 100%;
-  padding: 1.6rem; /* Increased padding for taller input boxes */
-  margin-bottom: 1.8rem; /* Slightly increased the bottom margin between boxes */
-  border: none;
-  border-radius: 8px;
-  background-color: #4C3E71;
-  color: #ffffff;
-  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  color: black; /* Set input text color to black */
 }
 
-button {
-  padding: 1rem; /* Increased padding for the button */
-  border: none;
-  border-radius: 25px;
-  background-color: #F88379;
-  color: #ffffff;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  align-self: center; /* Center the button */
-  margin-top: 2rem; /* Increased margin-top to push the button further down */
-}
-
-button:hover {
-  background-color: #F25A5A;
-}
-
+/* Chat window styling */
 .chat-window {
-  flex: 2;
-  margin-left: 450px;
-  padding: 2rem;
-  background-color: #3B3255;
+  width: 80%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  background-color: #e5ddd5;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: black; /* Set chat window text color to black */
 }
 
-.chat-window h1 {
-  font-size: 2rem;
-  color: #ffffff;
-  text-align: center;
-  margin: 0;
-}
-
+/* Messages styling */
 .messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  color: black; /* Set messages text color to black */
 }
 
 .message {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 12px;
-  max-width: 60%;
-  word-wrap: break-word;
-  color: #333;
-}
-
-.avatar-line{
   display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.avatar {
-  width: 40px;  /* Set a fixed width */
-  height: 40px; /* Set a fixed height */
-  border: solid #F25A5A 1px;
-  border-radius: 50%; /* Make it circular */
-  margin-right: 0.5rem; /* Space between the avatar and username */
-}
-
-.timestamp {
-  font-size: 0.75rem;
-  color: #aaa;
-  text-align: right;
-  margin-top: 0.5rem;
+  flex-direction: column;
+  max-width: 60%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1em;
+  color: black; /* Set individual message text color to black */
 }
 
 .message.sent {
-  background-color: #D1E7DD; /* Sent message green */
   align-self: flex-end;
+  background-color: #dcf8c6;
+  text-align: right;
 }
 
 .message.received {
-  background-color: #F8D7DA; /* Received message red */
   align-self: flex-start;
+  background-color: #fff;
 }
 
-input:focus, textarea:focus, button:focus {
-  outline: none;
+/* Avatar line styling */
+.avatar-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Timestamp styling */
+.timestamp {
+  font-size: 0.75em;
+  color: #888; /* Keep timestamp color as is */
+  margin-top: 5px;
+  text-align: right;
+}
+
+/* Input area styling */
+.message-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ccc;
+}
+
+.message-input input {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1em;
+  margin-right: 10px;
+  color: black; /* Set input text color to black */
+}
+
+.message-input button {
+  background-color: #25d366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.message-input button:hover {
+  background-color: #20c057;
 }

@@ -13,11 +13,9 @@ function App() {
   const preferLanguageRef = useRef(preferLanguage);
   const messagesEndRef = useRef(null);
   
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [pastMessage]);
-
 
   useEffect(() => {
     preferLanguageRef.current = preferLanguage;
@@ -38,7 +36,7 @@ function App() {
       const response = await fetchApi.json();
       const translatedMessage = response.responseData.translatedText;
       const timestamp = new Date().toLocaleString();
-      setPastMessage((pastMessages) => [...pastMessages, { from: newMessage.from, message: translatedMessage }]);
+      setPastMessage((pastMessages) => [...pastMessages, { from: newMessage.from, message: translatedMessage, timestamp }]);
     });
 
     return () => socket.disconnect();
@@ -55,42 +53,37 @@ function App() {
   function handleMessageChange(event) {
     setCurrMessage(event.target.value);
   }
+
   function getAvatarUrl(username) {
     const userId = username.charCodeAt(0) % 10; // Simple logic to get an ID based on the first character of the username
     return `https://avatar.iran.liara.run/public/${userId}`;
   }
-  
+
   return (
     <div className="container">
+      {/* Left sidebar for user input */}
       <div className="sidebar">
-        <h1>Chat App</h1>
+        <h1>Chat Bridge App</h1>
         <div>
           <p>Select User</p>
           <input 
             type="text" 
             value={specificUser} 
             onChange={(e) => setSpecificUser(e.target.value)} 
+            placeholder="Receiver"
           />
           <p>Preferred Language</p>
           <input 
             type="text" 
             value={preferLanguage} 
             onChange={(e) => setPreferLanguage(e.target.value)} 
+            placeholder="Language"
           />
-          <form onSubmit={handleMessage}>
-            <p>Message Box</p>
-            <input 
-              type="text" 
-              value={currMessage} 
-              onChange={handleMessageChange} 
-            />
-            <button type='submit'>Send Message!</button>
-          </form>
         </div>
       </div>
 
+      {/* Chat window without background image */}
       <div className="chat-window">
-        <h1>Messages</h1>
         <div className="messages">
           {
             pastMessage.map((message, index) => (
@@ -98,15 +91,25 @@ function App() {
                 key={index} 
                 className={`message ${message.from === socket.id ? 'sent' : 'received'}`}
               >
-                
-                <div className='avatar-line'><img src= {getAvatarUrl(message.from)} alt= 'avatar'className="avatar" /><strong>{message.from}</strong></div>
-                <p >{message.message}</p>
-                <p className="timestamp">{message.timestamp}</p> {/* Display the stored timestamp */}
+                <div className='avatar-line'><img src={getAvatarUrl(message.from)} alt='avatar' className="avatar" /><strong>{message.from}</strong></div>
+                <p>{message.message}</p>
+                <p className="timestamp">{message.timestamp}</p>
               </div>
             ))
           }
           <div ref={messagesEndRef} />
         </div>
+
+        {/* Message input at the bottom of the chat */}
+        <form onSubmit={handleMessage} className="message-input">
+          <input 
+            type="text" 
+            value={currMessage} 
+            onChange={handleMessageChange} 
+            placeholder="Type a message" 
+          />
+          <button type="submit">Send</button>
+        </form>
       </div>
     </div>
   );

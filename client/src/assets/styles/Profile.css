@@ -1,0 +1,22 @@
+.profile-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+  
+  p {
+    font-size: 14px;
+    color: #666;
+  }
+  

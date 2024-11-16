@@ -1,26 +1,46 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { io } from 'socket.io-client';
 import './App.css'; // Import the CSS file
+import axios from 'axios'
+import { LoginButton, LogoutButton } from "./components/Login"
+import { useAuth0 } from '@auth0/auth0-react';
+import Chat from './components/Chat';
+import Navbar from './components/Navbar';
 
 function App() {
   const socket = useMemo(() => io("http://localhost:3000"), []);
   const [socketId, setSocketId] = useState("");
   const [pastMessage, setPastMessage] = useState([]);
-  const [currMessage, setCurrMessage] = useState("");
+
   const [specificUser, setSpecificUser] = useState("");
   const [preferLanguage, setPreferLanguage] = useState("");
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log(user);
 
   const preferLanguageRef = useRef(preferLanguage);
   const messagesEndRef = useRef(null);
-  
+
+  const [chats, setChats] = useState({});
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [pastMessage]);
 
   useEffect(() => {
+    const getChats = async () => {
+      const data = await axios.get("http://localhost:3000/chat/6717b94a6593dc0c8fd45024");
+      console.log(data.data.messages)
+      setPastMessage(data.data.messages);
+    }
+
+    getChats();
+  }, []);
+
+
+  useEffect(() => {
     preferLanguageRef.current = preferLanguage;
   }, [preferLanguage]);
-    
+
   useEffect(() => {
     const handleSocketId = () => {
       console.log("connected", socket.id);
@@ -42,76 +62,22 @@ function App() {
     return () => socket.disconnect();
   }, []);
 
-  function handleMessage(event) {
-    event.preventDefault();
-    const timestamp = new Date().toLocaleString();
-    socket.emit("message", { message: currMessage, user: specificUser, language: preferLanguage, timestamp });
-    setPastMessage((pastMessages) => [...pastMessages, { from: socket.id, message: currMessage , timestamp}]);
-    setCurrMessage("");
-  }
-
-  function handleMessageChange(event) {
-    setCurrMessage(event.target.value);
-  }
-
-  function getAvatarUrl(username) {
-    const userId = username.charCodeAt(0) % 10; // Simple logic to get an ID based on the first character of the username
-    return `https://avatar.iran.liara.run/public/${userId}`;
-  }
-
   return (
-    <div className="container">
-      {/* Left sidebar for user input */}
-      <div className="sidebar">
-        <h1>Chat Bridge App</h1>
-        <div>
-          <p>Select User</p>
-          <input 
-            type="text" 
-            value={specificUser} 
-            onChange={(e) => setSpecificUser(e.target.value)} 
-            placeholder="Receiver"
-          />
-          <p>Preferred Language</p>
-          <input 
-            type="text" 
-            value={preferLanguage} 
-            onChange={(e) => setPreferLanguage(e.target.value)} 
-            placeholder="Language"
-          />
-        </div>
-      </div>
+    <>
+      <Navbar />
+      <div className="container">
 
-      {/* Chat window without background image */}
-      <div className="chat-window">
-        <div className="messages">
-          {
-            pastMessage.map((message, index) => (
-              <div 
-                key={index} 
-                className={`message ${message.from === socket.id ? 'sent' : 'received'}`}
-              >
-                <div className='avatar-line'><img src={getAvatarUrl(message.from)} alt='avatar' className="avatar" /><strong>{message.from}</strong></div>
-                <p>{message.message}</p>
-                <p className="timestamp">{message.timestamp}</p>
-              </div>
-            ))
-          }
-          <div ref={messagesEndRef} />
+        <div className="sidebar">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae temporibus est fugiat, in consequatur minus voluptas soluta minima voluptatem sunt, velit eveniet tenetur consectetur enim vero suscipit unde porro ad.
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat commodi tempora quas necessitatibus nesciunt maxime. Odit dolor, quia quisquam qui perferendis aspernatur consequuntur quae, unde exercitationem odio fugit recusandae? Neque!
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid facilis officia pariatur, provident enim delectus sequi rerum mollitia vitae atque vero distinctio quo eaque optio id, asperiores error excepturi cumque?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laudantium omnis eius incidunt, molestiae, necessitatibus placeat dignissimos excepturi corporis doloribus error aspernatur magni animi, atque id harum culpa iste doloremque.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo blanditiis dolorum animi praesentium ex eius obcaecati voluptas aut corporis, placeat eum commodi numquam, beatae est iusto soluta totam molestiae illum!
         </div>
 
-        {/* Message input at the bottom of the chat */}
-        <form onSubmit={handleMessage} className="message-input">
-          <input 
-            type="text" 
-            value={currMessage} 
-            onChange={handleMessageChange} 
-            placeholder="Type a message" 
-          />
-          <button type="submit">Send</button>
-        </form>
+        <Chat messages={pastMessage} />
       </div>
-    </div>
+    </>
   );
 }
 

@@ -10,13 +10,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Sidebar styling for user input */
 .sidebar {
   width: 20%;
   padding: 20px;
   background-color: #f0f0f0;
   border-right: 1px solid #ccc;
-  color: black; /* Set sidebar text color to black */
+  color: black;
 }
 
 .sidebar h1 {
@@ -31,7 +30,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1em;
-  color: black; /* Set input text color to black */
+  color: black; 
 }
 
 /* Chat window styling */
@@ -40,9 +39,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative; /* Ensure relative positioning */
-  color: black; /* Set chat window text color to black */
-  z-index: 1; /* Ensure content stays above the background */
+  position: relative;
+  color: black; 
+  z-index: 1; 
 }
 
 .chat-window::before {
@@ -52,20 +51,20 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('src/bg.png') no-repeat center center;
+  background: url('assets/images/bg.png') no-repeat center center;
   background-size: cover;
-  opacity: 0.3; /* Adjust opacity for transparency */
-  z-index: -1; /* Ensure the background stays behind the content */
+  opacity: 0.3; 
+  z-index: -1;
 }
 
 /* Messages styling */
 .messages {
   flex-grow: 1;
-  padding: 20px;
+  padding: 1.2rem 1.2rem 8rem 1.2rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  color: black; /* Set messages text color to black */
+  color: black;
 }
 
 .message {
@@ -76,7 +75,7 @@
   padding: 10px;
   border-radius: 10px;
   font-size: 1em;
-  color: black; /* Set individual message text color to black */
+  color: black;
 }
 
 .message.sent {
@@ -107,18 +106,20 @@
 /* Timestamp styling */
 .timestamp {
   font-size: 0.75em;
-  color: #888; /* Keep timestamp color as is */
+  color: #888; 
   margin-top: 5px;
   text-align: right;
 }
 
-/* Input area styling */
 .message-input {
   display: flex;
   align-items: center;
   padding: 10px;
   background-color: #f8f9fa;
   border-top: 1px solid #ccc;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .message-input input {
@@ -128,7 +129,7 @@
   border-radius: 20px;
   font-size: 1em;
   margin-right: 10px;
-  color: black; /* Set input text color to black */
+  color: black; 
 }
 
 .message-input button {

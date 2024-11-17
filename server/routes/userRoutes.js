@@ -28,10 +28,18 @@ router.post("/signup", async (req, res) => {
 }
 )
 
+router.post("/language",async (req,res) => {
+    const {emailId,languageCode} = req.body;
+    console.log(req.body);
+
+    await User.findOneAndUpdate({emailId},{mainLang:languageCode});
+
+    res.json({success:true,message:"Updated"});
+})
+
 router.post("/request", async (req, res) => {
     try {
         const { emailId, userId } = req.body;
-
         const offerUser = await User.findOne({ emailId });
 
         if (!offerUser) {

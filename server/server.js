@@ -29,7 +29,7 @@ app.use(cors({
 
 const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: `${process.env.CLIENT_DOMAIN}`,
         methods: ['GET', 'PUSH', 'POST', 'PATCH', 'DELETE', 'PUT'],
         credentials: true
     }

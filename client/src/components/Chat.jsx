@@ -135,7 +135,7 @@ function Chat({ specificUser, user }) {
 
   const handleMessage = async (event) => {
     event.preventDefault();
-    const timestamp = new Date().toLocaleString();
+    const timestamp = new Date();
 
     const messageData = {
       message: currMessage,

@@ -7,12 +7,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  
   <Auth0Provider
-    domain={import.meta.env.VITE_AUTH_DOMAIN}
-    clientId={import.meta.env.VITE_CLIENT_ID}
-    authorizationParams={{
-      redirect_uri: window.location.origin
-    }}
+  domain={import.meta.env.VITE_AUTH_DOMAIN}
+  clientId={import.meta.env.VITE_CLIENT_ID}
+  authorizationParams={{
+    redirect_uri: window.location.origin
+  }}
   >
     <ToastContainer
       position="top-right"
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       transition:Bounce
     />
     <ToastContainer />
+    {console.log(import.meta.env)}
     <App />
   </Auth0Provider>,
 )

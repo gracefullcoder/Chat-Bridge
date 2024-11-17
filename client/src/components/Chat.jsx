@@ -40,9 +40,9 @@ function Chat({ specificUser, user }) {
   const [preferLanguage, setPreferLanguage] = useState(user.mainLang);
   const preferLanguageRef = useRef(preferLanguage);
 
-  const socket = useMemo(() => io("http://localhost:3000"), []);
+  const socket = useMemo(() => io(`${import.meta.env.VITE_BACKEND_DOMAIN}`), []);
   const [socketId, setSocketId] = useState("");
-
+  
   // const messagesEndRef = useRef(null);
 
   useEffect(() => {

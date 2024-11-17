@@ -22,7 +22,7 @@ connectDb();
 app.use(bodyParser.json())
 
 app.use(cors({
-    origin: "*",
+    origin: `${process.env.CLIENT_DOMAIN}`,
     methods: ['GET', 'PUSH', 'POST', 'PATCH', 'DELETE', 'PUT'],
     credentials: true
 }))

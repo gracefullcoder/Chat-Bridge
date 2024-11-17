@@ -5,7 +5,7 @@ import "../assets/styles/Navbar.css";
 import { toastMessage } from "../HelperFunction";
 import axios from "axios";
 
-const Navbar = ({user,setUserDetails,setStatus}) => {
+const Navbar = ({ user, setUserDetails, setStatus }) => {
   const { isAuthenticated, loginWithRedirect, logout, isLoading } = useAuth0();
   const [showProfile, setShowProfile] = useState(false);
 
@@ -37,31 +37,18 @@ const Navbar = ({user,setUserDetails,setStatus}) => {
             onClick={() => setShowProfile(!showProfile)}
           />
           <button
-                onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-                className="auth-button"
-              >
-                Log Out
-              </button>
-          {showProfile && (
-            <div className="dropdown">
-              <button onClick={() => setShowProfile(false)} className="dropdown-item">
-                Close
-              </button>
-              <Profile user={user} />
-              <button
-                onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-                className="auth-button"
-              >
-                Log Out
-              </button>
-            </div>
-          )}
+            onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+            className="auth-button"
+          >
+            Log Out
+          </button>
         </div>
       ) : (
         <button onClick={loginWithRedirect} className="auth-button">
           Log In
         </button>
       )}
+
     </nav>
   );
 };

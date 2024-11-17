@@ -199,6 +199,7 @@ function Chat({ specificUser, user }) {
           value={preferLanguage}
           onChange={(e) => setPreferLanguage(e.target.value)}
           placeholder="Preferred Language"
+          className='prefer-lang'
         />
         <input
           type="text"

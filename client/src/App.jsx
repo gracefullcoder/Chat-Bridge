@@ -4,11 +4,12 @@ import { useAuth0, User } from '@auth0/auth0-react';
 import Navbar from './components/Navbar';
 import Container from './components/Container';
 import displayRazorPay from "./razorpay";
+import LandingPage from './components/LandingPage';
 
 
 function App() {
 
-  const { user } = useAuth0();
+  const { user ,loginWithRedirect} = useAuth0();
   const [userDetails, setUserDetails] = useState({});
   const [status, setStatus] = useState(0);
   console.log(user);
@@ -33,7 +34,7 @@ function App() {
       <Navbar user={user} setUserDetails={setUserDetails} setStatus={setStatus} />
       {user && status == 0 ? "LOADING" :
         status == 2 ? <Container user={{ ...userDetails, ...user }} /> :
-          <></>
+          <LandingPage loginWithRedirect={loginWithRedirect}/>
       }
     </>
   );

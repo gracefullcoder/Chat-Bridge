@@ -3,7 +3,7 @@
   display: flex;
   height: 100vh;
   font-family: 'Helvetica', sans-serif;
-  background-color: #e5ddd5;
+  background-color: #EFF6FF;  /* Changed to light blue */
   margin: 0;
   padding: 0;
   max-width: 100%;
@@ -28,7 +28,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('../images/bg.png') no-repeat center center;
+  background: #1E3A8A;  /* Changed to dark blue */
   background-size: cover;
   opacity: 0.3; 
   z-index: -1;
@@ -48,6 +48,7 @@
   display: flex;
   flex-direction: column;
   max-width: 60%;
+  width: 25%;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 10px;
@@ -57,7 +58,7 @@
 
 .message.sent {
   align-self: flex-end;
-  background-color: #dcf8c6;
+  background-color: #BFDBFE;  /* Changed to light blue */
   text-align: right;
 }
 
@@ -83,7 +84,7 @@
 /* Timestamp styling */
 .timestamp {
   font-size: 0.75em;
-  color: #888; 
+  color: #4B5563;  /* Changed to gray */
   margin-top: 5px;
   text-align: right;
 }
@@ -93,14 +94,13 @@
   align-items: center;
   padding: 10px;
   background-color: #f8f9fa;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #e0e0e0;
   position: fixed;
   bottom: 0;
   width: 80%;
 }
 
 .message-input input {
-  /* flex-grow: 1; */
   padding: 10px;
   border: none;
   border-radius: 20px;
@@ -110,30 +110,30 @@
   width: 100%;
 }
 
-.message-input .prefer-lang{
+.message-input .prefer-lang {
   width: 5rem;
 }
 
 .message-input button {
-  background-color: #25d366;
+  background-color: #2563EB;  /* Changed to blue */
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .message-input button:hover {
-  background-color: #20c057;
+  background-color: #1D4ED8;  /* Darker blue on hover */
 }
-
 
 /* Sidebar Base */
 .sidebar {
   width: 20%;
   height: 100vh;
-  background-color: #f0f0f0;
-  border-right: 1px solid #ccc;
+  background-color: #F1F5F9;  /* Changed to light blue-gray */
+  border-right: 1px solid #e0e0e0;
   display: flex;
   flex-direction: column;
 }
@@ -152,7 +152,7 @@
 .search-input-container {
   display: flex;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: #EFF6FF;  /* Changed to light blue */
   border-radius: 20px;
   padding: 4px;
 }
@@ -167,7 +167,7 @@
 }
 
 .search-button {
-  background-color: #25d366;
+  background-color: #2563EB;  /* Changed to blue */
   border: none;
   border-radius: 50%;
   width: 32px;
@@ -181,7 +181,7 @@
 }
 
 .search-button:hover {
-  background-color: #1fa855;
+  background-color: #1D4ED8;  /* Darker blue on hover */
 }
 
 /* Search Status Messages */
@@ -204,8 +204,8 @@
 }
 
 .search-status.info {
-  background-color: #cce5ff;
-  color: #004085;
+  background-color: #BFDBFE;  /* Changed to light blue */
+  color: #1E3A8A;  /* Changed to dark blue */
 }
 
 /* Users List Container */
@@ -228,18 +228,17 @@
   gap: 12px;
 }
 
-.user-item.prefer-lang{
+.user-item.prefer-lang {
   width: 4rem;
 }
 
-
 .user-item:hover {
-  background-color: #f5f5f5;
+  background-color: #EFF6FF;  /* Changed to light blue */
   transform: translateX(2px);
 }
 
 .user-item.active {
-  background-color: #25d366;
+  background-color: #2563EB;  /* Changed to blue */
 }
 
 .user-avatar {
@@ -269,7 +268,7 @@
 .user-name {
   font-size: 1rem;
   font-weight: 500;
-  color: #333;
+  color: #1E3A8A;  /* Changed to dark blue */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -284,7 +283,7 @@
 }
 
 .auth-button {
-  background-color: #25d366; /* WhatsApp green */
+  background-color: #2563EB;  /* Changed to blue */
   color: white;
   border: none;
   border-radius: 20px;
@@ -297,23 +296,22 @@
 }
 
 .auth-button:hover {
-  background-color: #20c057; /* Slightly darker green for hover */
+  background-color: #1D4ED8;  /* Darker blue for hover */
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px); /* Lift effect */
+  transform: translateY(-2px);
 }
 
 .auth-button:active {
-  background-color: #1a994a; /* Even darker green for active */
-  transform: translateY(0); /* Reset lift effect */
+  background-color: #1E40AF;  /* Even darker blue for active */
+  transform: translateY(0);
 }
 
 .auth-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.5); /* Focus ring */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);  /* Blue focus ring */
 }
 
-
-.profile-menu{
+.profile-menu {
   display: flex;
   align-items: center;
   gap: 0.8rem;

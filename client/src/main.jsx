@@ -27,7 +27,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       transition:Bounce
     />
     <ToastContainer />
-    {console.log(import.meta.env)}
     <App />
   </Auth0Provider>,
 )

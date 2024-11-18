@@ -48,7 +48,7 @@ async function displayRazorpay({userId,totalAmount, paymentUrl, userName,success
         amount: amount.toString(),
         currency: currency,
         name: userName,
-        description: "Test Transaction",
+        description: "Chat Transaction",
         image: 'https://ik.imagekit.io/vaibhav11/Koe_Cafe/Additional/tr:w-40,h-40/logo1.jpg?updatedAt=1721420177935',
         order_id: order_id,
         handler: async function (response) {

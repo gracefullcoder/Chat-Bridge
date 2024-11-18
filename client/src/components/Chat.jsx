@@ -1,6 +1,29 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react'
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
+
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Spanish' },
+  { code: 'fr', name: 'French' },
+  { code: 'de', name: 'German' },
+  { code: 'it', name: 'Italian' },
+  { code: 'pt', name: 'Portuguese' },
+  { code: 'ru', name: 'Russian' },
+  { code: 'zh', name: 'Chinese' },
+  { code: 'ja', name: 'Japanese' },
+  { code: 'ko', name: 'Korean' },
+  { code: 'ar', name: 'Arabic' },
+  { code: 'hi', name: 'Hindi' },
+  { code: 'bn', name: 'Bengali' },
+  { code: 'ur', name: 'Urdu' },
+  { code: 'te', name: 'Telugu' },
+  { code: 'mr', name: 'Marathi' },
+  { code: 'ta', name: 'Tamil' },
+  { code: 'gu', name: 'Gujarati' },
+  { code: 'kn', name: 'Kannada' },
+  { code: 'ml', name: 'Malayalam' }
+].sort((a, b) => a.name.localeCompare(b.name));
 
 const translatedMessage = async (toLang, messages) => {
   const updatedChats = await Promise.all(
@@ -13,17 +36,15 @@ const translatedMessage = async (toLang, messages) => {
         const translatedMessage = response.responseData.translatedText;
         return { ...message, message: translatedMessage };
       } else {
-
         return message;
       }
-
     })
   );
 
   function formatTimestamp(dateString) {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
@@ -39,11 +60,9 @@ function Chat({ specificUser, user }) {
   const [currMessage, setCurrMessage] = useState("");
   const [preferLanguage, setPreferLanguage] = useState(user.mainLang);
   const preferLanguageRef = useRef(preferLanguage);
-
   const socket = useMemo(() => io(`${import.meta.env.VITE_BACKEND_DOMAIN}`), []);
   const [socketId, setSocketId] = useState("");
-  
-  // const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     preferLanguageRef.current = preferLanguage;
@@ -95,7 +114,7 @@ function Chat({ specificUser, user }) {
               createdAt: newMessage.createdAt,
             },
           ]);
-        }else{
+        } else {
           setChats((prevChats) => [
             ...prevChats,
             {
@@ -105,7 +124,6 @@ function Chat({ specificUser, user }) {
             },
           ]);
         }
-        
       } catch (error) {
         console.error("Error translating message:", error);
       }
@@ -119,6 +137,10 @@ function Chat({ specificUser, user }) {
 
   const handleMessageChange = (event) => {
     setCurrMessage(event.target.value);
+  };
+
+  const handleLanguageChange = (event) => {
+    setPreferLanguage(event.target.value);
   };
 
   const sendMessage = async (data) => {
@@ -175,8 +197,7 @@ function Chat({ specificUser, user }) {
         {chats.map((message, index) => (
           <div
             key={index}
-            className={`message ${message.emailId === user.email ? "sent" : "received"
-              }`}
+            className={`message ${message.emailId === user.email ? "sent" : "received"}`}
           >
             <div className="avatar-line">
               <img
@@ -190,17 +211,21 @@ function Chat({ specificUser, user }) {
             <p className="timestamp">{new Date(message.createdAt).toLocaleString()}</p>
           </div>
         ))}
-        {/* <div ref={messagesEndRef} /> */}
+        <div ref={messagesEndRef} />
       </div>
 
       <form onSubmit={handleMessage} className="message-input">
-        <input
-          type="text"
+        <select
           value={preferLanguage}
-          onChange={(e) => setPreferLanguage(e.target.value)}
-          placeholder="Preferred Language"
-          className='prefer-lang'
-        />
+          onChange={handleLanguageChange}
+          className="dropdown-select prefer-lang"
+        >
+          {languages.map((language) => (
+            <option key={language.code} value={language.code}>
+              {language.name}
+            </option>
+          ))}
+        </select>
         <input
           type="text"
           value={currMessage}

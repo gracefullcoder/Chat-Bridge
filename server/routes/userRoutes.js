@@ -23,7 +23,7 @@ router.post("/signup", async (req, res) => {
     } else {
         const newUser = new User({ name, emailId: email });
         await newUser.save();
-        res.json({ status: "success", message: "User Created Successfully!", userDetails: { userId: newUser._id, mainLang: user.mainLang || "en", paymentId: user.paymentId || false } });
+        res.json({ status: "success", message: "User Created Successfully!", userDetails: { userId: newUser._id, mainLang: "en", paymentId: user.paymentId || false } });
     }
 }
 )

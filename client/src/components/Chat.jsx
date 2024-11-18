@@ -41,17 +41,6 @@ const translatedMessage = async (toLang, messages) => {
     })
   );
 
-  function formatTimestamp(dateString) {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-  
-    return `${day}/${month}/${year} ${hours}:${minutes}`;
-  }
-
   return updatedChats;
 };
 
@@ -63,6 +52,12 @@ function Chat({ specificUser, user }) {
   const socket = useMemo(() => io(`${import.meta.env.VITE_BACKEND_DOMAIN}`), []);
   const [socketId, setSocketId] = useState("");
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chats]);
 
   useEffect(() => {
     preferLanguageRef.current = preferLanguage;

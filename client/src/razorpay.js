@@ -14,7 +14,7 @@ function loadScript(src) {
     });
 }
 
-async function displayRazorpay({userId,totalAmount, paymentUrl, userName,successUrl,updateChanges}) {
+async function displayRazorpay({userId,totalAmount, paymentUrl, userName,successUrl,updateChanges,setMakePay}) {
     
     const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
@@ -74,6 +74,8 @@ async function displayRazorpay({userId,totalAmount, paymentUrl, userName,success
 
             if (fetchOrder.ok) {
                 updateChanges();
+            }else{
+                setMakePay(false);
             }
             toastMessage(orderResult);
         },

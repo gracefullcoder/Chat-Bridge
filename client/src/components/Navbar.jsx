@@ -79,7 +79,6 @@ const Navbar = ({ user, setUserDetails, setStatus }) => {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
 
   return (
     <nav className="navbar">
@@ -124,7 +123,7 @@ const Navbar = ({ user, setUserDetails, setStatus }) => {
           </button>
         </div>
       ) : (
-        <button onClick={loginWithRedirect} className="auth-button">
+        !isLoading && <button onClick={loginWithRedirect} className="auth-button">
           Log In
         </button>
       )}

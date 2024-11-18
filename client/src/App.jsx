@@ -12,10 +12,11 @@ function App() {
   const { user ,loginWithRedirect} = useAuth0();
   const [userDetails, setUserDetails] = useState({});
   const [status, setStatus] = useState(0);
+  const [makePay,setMakePay] = useState(false);
   console.log(user);
 
   useEffect(() => {
-    if (status == 1) {
+    if (status == 1 && makePay) {
       const requiredDetails = {
         userId: userDetails.userId
         , totalAmount: 500
@@ -23,18 +24,19 @@ function App() {
         , userName: user.name
         , successUrl: `${import.meta.env.VITE_BACKEND_DOMAIN}/payment/success`
         // , orderDetails: cart.orders
-        , updateChanges: () => { setStatus(2) }
+        , updateChanges: () => { setStatus(2) },
+        setMakePay
       }
       displayRazorPay(requiredDetails);
     }
-  }, [user, status])
+  }, [user, status,makePay])
 
   return (
     <>
       <Navbar user={user} setUserDetails={setUserDetails} setStatus={setStatus} />
-      {user && status == 0 ? "LOADING" :
+      {!user && status == 0 ? <LandingPage loginWithRedirect={loginWithRedirect} setMakePay={setMakePay} status={status}/> :
         status == 2 ? <Container user={{ ...userDetails, ...user }} /> :
-          <LandingPage loginWithRedirect={loginWithRedirect}/>
+          <LandingPage loginWithRedirect={loginWithRedirect} setMakePay={setMakePay} status={status}/>
       }
     </>
   );

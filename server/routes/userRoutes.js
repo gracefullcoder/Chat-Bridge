@@ -19,11 +19,11 @@ router.post("/signup", async (req, res) => {
     const user = await User.findOne({ emailId: email });
     // console.log(user, 'dfvsg', req.body);
     if (user) {
-        res.json({ status: "success", message: "Login successfull", userDetails: { userId: user._id, mainLang: user.mainLang || "en", paymentId: user.paymentId || false } });
+        res.json({ status: "success", message: "Login successfull", userDetails: { userId: user._id, mainLang: user.mainLang || "en", paymentId: user?.paymentId ? user.paymentId : false } });
     } else {
         const newUser = new User({ name, emailId: email });
         await newUser.save();
-        res.json({ status: "success", message: "User Created Successfully!", userDetails: { userId: newUser._id, mainLang: "en", paymentId: user.paymentId || false } });
+        res.json({ status: "success", message: "User Created Successfully!", userDetails: { userId: newUser._id, mainLang: "en",  paymentId: user?.paymentId ? user.paymentId : false  } });
     }
 }
 )

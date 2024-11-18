@@ -2,7 +2,15 @@ import React from 'react';
 import { MessageSquare, Globe, Users, Zap } from 'lucide-react';
 import "../assets/styles/landingPage.css";
 
-const LandingPage = ({loginWithRedirect}) => {
+const LandingPage = ({loginWithRedirect,setMakePay,status}) => {
+
+  const handleGetStarted = async () => {
+    if(status == 0){
+      loginWithRedirect();
+    }else{
+      setMakePay(true);
+    }
+  }
   return (
     <div className="landing-container">
       {/* Hero Section */}
@@ -14,7 +22,7 @@ const LandingPage = ({loginWithRedirect}) => {
         <p className="hero-description">
           Break language barriers with real-time chat translation. Connect with anyone, anywhere, in your preferred language.
         </p>
-        <button className="hero-button" onClick={() => loginWithRedirect()}>
+        <button className="hero-button" onClick={handleGetStarted}>
           Get Started
         </button>
       </div>

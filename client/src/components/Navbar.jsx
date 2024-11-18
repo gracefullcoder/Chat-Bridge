@@ -40,6 +40,7 @@ const Navbar = ({ user, setUserDetails, setStatus }) => {
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_DOMAIN}/user/signup`, user);
         console.log(response);
         await setUserDetails(response.data.userDetails);
+        setSelectedLanguage(response.data.userDetails.mainLang || "en");
         await setStatus(response.data.userDetails.paymentId ? 2 : 1);
         toastMessage(response.data);
       }
@@ -67,7 +68,8 @@ const Navbar = ({ user, setUserDetails, setStatus }) => {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_DOMAIN}/user/language`, {
         emailId: user.email,
         languageCode: selectedLanguage
-      });
+      }); 
+      setUserDetails(prev => {return {...prev,mainLang:selectedLanguage}})
       
       toastMessage({ status:"success",message: `Language preference updated to ${languages.find(lang => lang.code === selectedLanguage).name}` });
       setShowProfile(false);
